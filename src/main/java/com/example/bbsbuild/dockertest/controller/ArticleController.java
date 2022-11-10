@@ -27,7 +27,7 @@ public class ArticleController {
 
     @GetMapping("/new")
     public String newArticle() {
-        return "/articles/new";
+        return "articles/new";
     }
 
     @PostMapping("")
