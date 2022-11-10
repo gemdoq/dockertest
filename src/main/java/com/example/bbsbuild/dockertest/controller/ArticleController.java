@@ -5,9 +5,13 @@ import com.example.bbsbuild.dockertest.domain.entity.Article;
 import com.example.bbsbuild.dockertest.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/articles")
@@ -31,5 +35,18 @@ public class ArticleController {
         Article savedArticle = articleRepository.save(articleDto.toEntity());
         log.info("generatedId:{}", savedArticle.getId());
         return String.format("redirect:/articles/%d", savedArticle.getId());
+    }
+
+    @GetMapping("/{id}")
+    public String getSingleArticle(@PathVariable("id") Long id, Model model) {
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            model.addAttribute("article", article);
+            return "articles/show";
+        } else {
+            return "articles/error";
+        }
     }
 }
