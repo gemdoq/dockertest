@@ -1,0 +1,13 @@
+<div class="container">
+    이 페이지는 EDIT 페이지입니다.
+    {{#article}}
+        <form action="/articles/{{id}}/update" method="post">
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="text" name="title" value="{{title}}" /><br>
+            <textarea rows="3" name="content">{{content}}</textarea><br>
+            <button type="submit" class="btn btn-primary">제출</button><br>
+            <button type="button" class="btn btn-primary"><a href="/articles/{{id}}">1개 조회 페이지</a></button>
+            <button type="button" class="btn btn-danger"><a href="/articles">목록</a></button>
+        </form>
+    {{/article}}
+</div>
