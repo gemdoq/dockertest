@@ -10,5 +10,11 @@
                 <p class="card-text">{{content}}</p>
             </div>
         </div>
+        <button type="button" class="btn btn-primary"><a href="/articles/{{id}}/edit">글수정</a></button>
+        <button type="button" class="btn btn-danger"><a href="/articles/{{id}}/delete">글삭제</a></button><br>
     {{/article}}
+    {{^article}}
+        {{message}}<br>
+    {{/article}}
+    <button type="button" class="btn btn-primary"><a href="/articles/list">글목록</a></button>
 </div>
