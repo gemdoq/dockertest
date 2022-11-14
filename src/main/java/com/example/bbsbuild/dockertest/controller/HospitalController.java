@@ -24,17 +24,17 @@ public class HospitalController {
 
     @GetMapping("")
     public String index() {
-        return String.format("redirect:/articles/list");
+        return String.format("redirect:/hospitals/list");
     }
 
     @GetMapping("/{id}")
     public String findById(@PathVariable Integer id, Model model) {
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
         if (optionalHospital.isEmpty()) {
-            return "hospital/error";
+            return "hospitals/error";
         } else {
             model.addAttribute("hospital", optionalHospital.get());
-            return "hospital/show";
+            return "hospitals/show";
         }
     }
 
@@ -44,6 +44,6 @@ public class HospitalController {
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next",pageable.next().getPageNumber());
-        return "hospital/list";
+        return "hospitals/list";
     }
 }
