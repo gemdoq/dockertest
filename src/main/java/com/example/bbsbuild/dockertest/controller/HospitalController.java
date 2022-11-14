@@ -22,29 +22,28 @@ public class HospitalController {
 
     private final HospitalRepository hospitalRepository;
 
+    @GetMapping("")
+    public String index() {
+        return String.format("redirect:/articles/list");
+    }
+
     @GetMapping("/{id}")
     public String findById(@PathVariable Integer id, Model model) {
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
-        if (optionalHospital.isPresent()) {
-            model.addAttribute("hospital", optionalHospital.get());
-            return "hospitals/show";
+        if (optionalHospital.isEmpty()) {
+            return "hospital/error";
         } else {
-            return "hospitals/error";
+            model.addAttribute("hospital", optionalHospital.get());
+            return "hospital/show";
         }
     }
 
     @GetMapping("/list")
     public String list(Model model, Pageable pageable) {
         Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
-        log.info("size:{}", hospitals.getSize());
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
-        return "hospitals/list";
-    }
-
-    @GetMapping("")
-    public String list(Model model) {
-        return "redirect:/hospitals/list";
+        model.addAttribute("next",pageable.next().getPageNumber());
+        return "hospital/list";
     }
 }
