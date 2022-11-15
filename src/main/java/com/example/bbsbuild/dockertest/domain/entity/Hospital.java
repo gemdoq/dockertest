@@ -13,8 +13,19 @@ import javax.persistence.*;
 @Getter
 public class Hospital {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String hospital_name;
-    private String road_name_address;
+
+    @Column(name = "road_name_address")
+    private String roadNameAddress;
+
+    @Column(name = "hospital_name")
+    private String hospitalName;
+    private Integer patientRoomCount;
+    private Integer totalNumberOfBeds;
+    private String businessTypeName;
+    private Float totalAreaSize;
+
+    public static HospitalResponse of(Hospital hospital) {
+        return new HospitalResponse(hospital.getId(), hospital.getHospitalName(), hospital.getRoadNameAddress(), hospital.getPatientRoomCount(), hospital.getTotalNumberOfBeds(), hospital.getBusinessTypeName(), hospital.getTotalAreaSize());
+    }
 }
