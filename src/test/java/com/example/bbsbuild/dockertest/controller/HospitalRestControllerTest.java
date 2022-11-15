@@ -18,8 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(HospitalController.class)
-class HospitalControllerTest {
+@WebMvcTest(HospitalRestController.class)
+class HospitalRestControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -28,8 +28,7 @@ class HospitalControllerTest {
     HospitalService hospitalService; // ---> 가짜 객체를 쓰면 좋은점 DB와 상관없이 테스트 가능
 
     @Test
-    @DisplayName("1개의 Json형태로 Response가 잘 오는지")
-        //비즈니스로직(Service를 검증하지 않음) Controller만 검증
+    @DisplayName("1개의 Json형태로 Response가 잘 오는지") //비즈니스로직(Service를 검증하지 않음) Controller만 검증
     void jsonResponse() throws Exception {
         //{"id":2321,"roadNameAddress":"서울특별시 서초구 서초중앙로 230, 202호 (반포동, 동화반포프라자빌딩)","hospitalName":"노소아청소년과의원","patientRoomCount":0,"totalNumberOfBeds":0,
         // "businessTypeName":"의원","totalAreaSize":0.0,"businessStatusName":"영업중"}
@@ -47,12 +46,14 @@ class HospitalControllerTest {
         given(hospitalService.getHospital(2321))
                 .willReturn(hospitalResponse);
 
+        int hospitalId = 2321;
+
         // 앞에서 Autowired한 mockMvc
         String url = String.format("/api/v1/hospitals/%d", hospitalId);
         mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.hospitalName").exists())  // $는 루트 $아래에 hospitalName이 있어야 함
-                .andExpect(MockMvcResultMatchers.jsonPath("$.hospitalName").value("노소아청소년과의원"))
+                .andExpect(jsonPath("$.hospitalName").value("노소아청소년과의원"))
                 .andDo(print()); // http request, response내역을 출력 해라
 
         verify(hospitalService).getHospital(hospitalId);// getHospital()메소드의 호출이 있었는지 확인
