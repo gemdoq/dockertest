@@ -1,9 +1,13 @@
 package com.example.bbsbuild.dockertest.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class HospitalResponse {
         private Integer id;
@@ -15,7 +19,14 @@ public class HospitalResponse {
         private String businessStatusName;
         private Float totalAreaSize;
 
-        public HospitalResponse(Integer id, String hospitalName, String roadNameAddress, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
+        public HospitalResponse(
+                Integer id,
+                String hospitalName,
+                String roadNameAddress,
+                Integer patientRoomCount,
+                Integer totalNumberOfBeds,
+                String businessTypeName,
+                Float totalAreaSize) {
                 this.id = id;
                 this.hospitalName = hospitalName;
                 this.roadNameAddress = roadNameAddress;
