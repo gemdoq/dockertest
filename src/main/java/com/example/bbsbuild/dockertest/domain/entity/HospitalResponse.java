@@ -12,6 +12,7 @@ public class HospitalResponse {
         private Integer patientRoomCount;
         private Integer totalNumberOfBeds;
         private String businessTypeName;
+        private String businessStatusName;
         private Float totalAreaSize;
 
         public HospitalResponse(Integer id, String hospitalName, String roadNameAddress, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
@@ -21,6 +22,11 @@ public class HospitalResponse {
                 this.patientRoomCount = patientRoomCount;
                 this.totalNumberOfBeds = totalNumberOfBeds;
                 this.businessTypeName = businessTypeName;
+                this.businessStatusName = businessStatusName;
                 this.totalAreaSize = totalAreaSize;
+        }
+
+        public void setBusinessStatusName(String businessStatusName) {
+                this.businessStatusName = businessStatusName;
         }
 }
