@@ -1,5 +1,6 @@
 package com.example.bbsbuild.dockertest.domain.entity;
 
+import com.example.bbsbuild.dockertest.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

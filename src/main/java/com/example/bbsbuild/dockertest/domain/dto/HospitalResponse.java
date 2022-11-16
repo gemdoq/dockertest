@@ -1,4 +1,4 @@
-package com.example.bbsbuild.dockertest.domain.entity;
+package com.example.bbsbuild.dockertest.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.example.bbsbuild.dockertest.service;
 
 import com.example.bbsbuild.dockertest.domain.entity.Hospital;
-import com.example.bbsbuild.dockertest.domain.entity.HospitalResponse;
+import com.example.bbsbuild.dockertest.domain.dto.HospitalResponse;
 import com.example.bbsbuild.dockertest.repository.HospitalRepository;
 import org.springframework.stereotype.Service;
 
