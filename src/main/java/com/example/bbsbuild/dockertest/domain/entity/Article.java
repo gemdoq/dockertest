@@ -1,5 +1,6 @@
 package com.example.bbsbuild.dockertest.domain.entity;
 
+import com.example.bbsbuild.dockertest.domain.dto.ArticleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,9 @@ public class Article {
 
     public Article toEntity() {
         return new Article(this.id, this.title, this.content);
+    }
+
+    public static ArticleResponse of(Article article) {
+        return new ArticleResponse(article.getId(), article.getTitle(), article.getContent());
     }
 }
