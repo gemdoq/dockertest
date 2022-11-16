@@ -1,6 +1,6 @@
 package com.example.bbsbuild.dockertest.controller;
 
-import com.example.bbsbuild.dockertest.domain.dto.ArticleDto;
+import com.example.bbsbuild.dockertest.domain.dto.ArticleRequest;
 import com.example.bbsbuild.dockertest.domain.entity.Article;
 import com.example.bbsbuild.dockertest.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +31,9 @@ public class ArticleController {
     }
 
     @PostMapping("")
-    public String createArticle(ArticleDto articleDto) {
-        log.info(articleDto.toString());
-        Article savedArticle = articleRepository.save(articleDto.toEntity());
+    public String createArticle(ArticleRequest articleRequest) {
+        log.info(articleRequest.toString());
+        Article savedArticle = articleRepository.save(articleRequest.toEntity());
         log.info("generatedId:{}", savedArticle.getId());
         return String.format("redirect:/articles/%d", savedArticle.getId());
     }
@@ -78,9 +78,9 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
-        log.info("title:{} content:{}", articleDto.getTitle(), articleDto.getContent());
-        Article updatedArticle = articleRepository.save(articleDto.toEntity());
+    public String update(@PathVariable Long id, ArticleRequest articleRequest, Model model) {
+        log.info("title:{} content:{}", articleRequest.getTitle(), articleRequest.getContent());
+        Article updatedArticle = articleRepository.save(articleRequest.toEntity());
         model.addAttribute("article", updatedArticle);
         return String.format("redirect:/articles/%d", updatedArticle.getId());
     }

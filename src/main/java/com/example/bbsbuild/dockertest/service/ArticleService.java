@@ -1,9 +1,10 @@
 package com.example.bbsbuild.dockertest.service;
 
+import com.example.bbsbuild.dockertest.domain.dto.ArticleRequest;
 import com.example.bbsbuild.dockertest.domain.dto.ArticleResponse;
+import com.example.bbsbuild.dockertest.domain.dto.ArticleDto;
 import com.example.bbsbuild.dockertest.domain.entity.Article;
 import com.example.bbsbuild.dockertest.repository.ArticleRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,10 +18,12 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public ArticleResponse getArticleById(Long id) {
-        Optional<Article> optionalArticle = articleRepository.findById(id);
-        Article article = optionalArticle.get();
-        ArticleResponse articleResponse = Article.of(article);
-        return articleResponse;
+    public ArticleResponse getOneById(Long id) {
+        Article article = articleRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 게시물을 찾을 수 없습니다."));
+        return ArticleResponse.of(article);
+    }
+
+    public ArticleResponse create(ArticleRequest articleRequest) {
+        return ArticleResponse.of(articleRepository.save(articleRequest.toEntity()));
     }
 }
