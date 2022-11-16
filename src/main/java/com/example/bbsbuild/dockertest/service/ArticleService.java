@@ -17,10 +17,10 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public ResponseEntity<ArticleResponse> getArticleById(Long id) {
+    public ArticleResponse getArticleById(Long id) {
         Optional<Article> optionalArticle = articleRepository.findById(id);
         Article article = optionalArticle.get();
         ArticleResponse articleResponse = Article.of(article);
-        return ResponseEntity.ok().body(articleResponse);
+        return articleResponse;
     }
 }
