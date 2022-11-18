@@ -2,6 +2,7 @@ package com.example.bbsbuild.dockertest.domain.entity;
 
 import com.example.bbsbuild.dockertest.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,5 +37,12 @@ public class Hospital {
                 hospital.getTotalNumberOfBeds(),
                 hospital.getBusinessTypeName(),
                 hospital.getTotalAreaSize());
+    }
+
+    public Hospital(Integer id, String hospitalName, String roadNameAddress, Integer businessStatusCode) {
+        this.id = id;
+        this.hospitalName = hospitalName;
+        this.roadNameAddress = roadNameAddress;
+        this.businessStatusCode = businessStatusCode;
     }
 }

@@ -2,12 +2,9 @@ package com.example.bbsbuild.dockertest.service;
 
 import com.example.bbsbuild.dockertest.domain.dto.ArticleRequest;
 import com.example.bbsbuild.dockertest.domain.dto.ArticleResponse;
-import com.example.bbsbuild.dockertest.domain.dto.ArticleDto;
 import com.example.bbsbuild.dockertest.domain.entity.Article;
 import com.example.bbsbuild.dockertest.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ArticleService {

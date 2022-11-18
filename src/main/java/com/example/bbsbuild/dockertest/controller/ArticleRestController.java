@@ -2,7 +2,6 @@ package com.example.bbsbuild.dockertest.controller;
 
 import com.example.bbsbuild.dockertest.domain.dto.ArticleRequest;
 import com.example.bbsbuild.dockertest.domain.dto.ArticleResponse;
-import com.example.bbsbuild.dockertest.domain.dto.ArticleDto;
 import com.example.bbsbuild.dockertest.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
