@@ -25,7 +25,7 @@ class HospitalServiceTest {
     }
 
     @Test
-    @DisplayName("영업중인지 확인해서 가져올 것")
+    @DisplayName("가져와서 영업중인지 확인할 것")
     void getHospital() {
         Mockito.when(hospitalRepository.findById(1))
                 .thenReturn(Optional.of(new Hospital(1, "111", "11111", 13)));
