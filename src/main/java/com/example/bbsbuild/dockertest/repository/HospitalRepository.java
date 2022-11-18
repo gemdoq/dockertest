@@ -1,6 +1,8 @@
 package com.example.bbsbuild.dockertest.repository;
 
 import com.example.bbsbuild.dockertest.domain.entity.Hospital;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
     List<Hospital> findByHospitalNameStartsWith(String keyword); // 시작
 
     List<Hospital> findByTotalNumberOfBedsBetween(Integer start, Integer end);
+
+    Page<Hospital> findByRoadNameAddressContaining(String keyword, Pageable pageable); // keyword로 찾아서 pageable로
 
 }

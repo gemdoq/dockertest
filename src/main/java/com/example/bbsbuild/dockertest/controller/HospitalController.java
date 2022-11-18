@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -39,8 +40,13 @@ public class HospitalController {
     }
 
     @GetMapping("/list")
-    public String list(Model model, Pageable pageable) {
-        Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
+    public String searchList(@RequestParam(required = false) String keyword, Model model, Pageable pageable) {
+        Page<Hospital> hospitals;
+        if(keyword == null) { hospitals = hospitalRepository.findAll(pageable); }
+        else { hospitals = hospitalRepository.findByRoadNameAddressContaining(keyword, pageable); }
+        log.info("keyword:{}", keyword);
+
+        model.addAttribute("keyword", keyword);
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next",pageable.next().getPageNumber());

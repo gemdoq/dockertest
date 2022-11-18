@@ -1,24 +1,43 @@
 {{> layouts/header}}
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
-    </tr>
-    </thead>
-    <tbody>
-    {{#hospitals}}
+
+<form class="container" action="/hospitals" method="get">
+    <form class="row g-3">
+        <div class="col-auto">
+            {{#keyword}}
+                <input type="text" class="form-control" name="keyword" value="{{keyword}}" placeholder="지역검색">
+            {{/keyword}}
+            {{^keyword}}
+                <input type="text" class="form-control" name="keyword" placeholder="지역검색">
+            {{/keyword}}
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+        </div>
+    </form>
+</form>
+<form class="container">
+    <table class="table table-hover">
+        <thead>
         <tr>
-            <th scope="row">{{id}}</th>
-            <td><a href="/hospitals/{{id}}">{{hospital_name}}</a></td>
-            <td>{{road_name_address}}</td>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
         </tr>
-    {{/hospitals}}
-    </tbody>
-</table>
-<ul class="pagination justify-content-center">
-    <a class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
-</ul>
+        </thead>
+        <tbody>
+        {{#hospitals}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td><a href="/hospitals/{{id}}">{{hospitalName}}</a></td>
+                <td>{{roadNameAddress}}</td>
+            </tr>
+        {{/hospitals}}
+        </tbody>
+    </table>
+    <ul class="pagination justify-content-center">
+        <a class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
+    </ul>
+</form>
+
 {{> layouts/footer}}
