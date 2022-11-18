@@ -1,20 +1,6 @@
 {{> layouts/header}}
 
-<form class="container" action="/hospitals" method="get">
-    <form class="row g-3">
-        <div class="col-auto">
-            {{#keyword}}
-                <input type="text" class="form-control" name="keyword" value="{{keyword}}" placeholder="지역검색">
-            {{/keyword}}
-            {{^keyword}}
-                <input type="text" class="form-control" name="keyword" placeholder="지역검색">
-            {{/keyword}}
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Search</button>
-        </div>
-    </form>
-</form>
+{{> hospitals/search}}
 <form class="container">
     <table class="table table-hover">
         <thead>

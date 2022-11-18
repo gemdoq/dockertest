@@ -23,11 +23,6 @@ public class HospitalController {
 
     private final HospitalRepository hospitalRepository;
 
-    @GetMapping("")
-    public String index() {
-        return String.format("redirect:/hospitals/list");
-    }
-
     @GetMapping("/{id}")
     public String findById(@PathVariable Integer id, Model model) {
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
@@ -39,7 +34,7 @@ public class HospitalController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("")
     public String searchList(@RequestParam(required = false) String keyword, Model model, Pageable pageable) {
         Page<Hospital> hospitals;
         if(keyword == null) { hospitals = hospitalRepository.findAll(pageable); }
@@ -50,6 +45,7 @@ public class HospitalController {
         model.addAttribute("hospitals", hospitals);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next",pageable.next().getPageNumber());
+
         return "hospitals/list";
     }
 }
