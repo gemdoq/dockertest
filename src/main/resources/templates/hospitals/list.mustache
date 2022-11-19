@@ -5,9 +5,9 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
+            <th scope="col">번호</th>
+            <th scope="col">병원명</th>
+            <th scope="col">도로명주소</th>
         </tr>
         </thead>
         <tbody>
@@ -20,10 +20,18 @@
         {{/hospitals}}
         </tbody>
     </table>
-    <ul class="pagination justify-content-center">
-        <a class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
-    </ul>
+    {{#keyword}}
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{previous}}">이전</li>
+            <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{next}}">다음</li>
+        </ul>
+    {{/keyword}}
+    {{^keyword}}
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page={{previous}}">이전</li>
+            <li class="page-item"><a class="page-link" href="?page={{next}}">다음</li>
+        </ul>
+    {{/keyword}}
 </form>
 
 {{> layouts/footer}}
