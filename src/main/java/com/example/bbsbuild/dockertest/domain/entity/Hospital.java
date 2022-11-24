@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "nation_wide_hospitals")
@@ -27,6 +28,9 @@ public class Hospital {
     private String businessTypeName;
     private Integer businessStatusCode;
     private Float totalAreaSize;
+
+    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
+    private List<Review> reviews;
 
     public static HospitalResponse of(Hospital hospital) {
         return new HospitalResponse(

@@ -1,7 +1,9 @@
 package com.example.bbsbuild.dockertest.controller;
 
 import com.example.bbsbuild.dockertest.domain.entity.Hospital;
+import com.example.bbsbuild.dockertest.domain.entity.Review;
 import com.example.bbsbuild.dockertest.repository.HospitalRepository;
+import com.example.bbsbuild.dockertest.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,14 +24,19 @@ import java.util.Optional;
 public class HospitalController {
 
     private final HospitalRepository hospitalRepository;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
+    public String findById(@PathVariable Integer id, Model model, Pageable pageable) {
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+        Page<Review> reviews = reviewRepository.findByHospitalId(id, pageable);
+
         if (optionalHospital.isEmpty()) {
             return "hospitals/error";
         } else {
+            log.info("review cnt:{} {}", reviews.getSize(), reviews);
             model.addAttribute("hospital", optionalHospital.get());
+            model.addAttribute("reviews", reviews);
             return "hospitals/show";
         }
     }
